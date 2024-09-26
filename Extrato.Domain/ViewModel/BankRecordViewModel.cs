@@ -5,7 +5,7 @@ namespace Extrato.Api.ViewModel
 {
     public class BankRecordViewModel
     {
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM}")]
         public DateTime Data { get; set; }
 
         [Range(0, 2, ErrorMessage = "The field {0} must be greater than {0}.")]

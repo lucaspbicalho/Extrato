@@ -1,4 +1,6 @@
 using Extrato.Infrastructure;
+using Extrato.Infrastructure.Repositories;
+using Extrato.Services.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +10,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<FakeContext>();
 //configure InMemory context 
 builder.Services.AddDbContext<ExtratoDbContext>(db => db.UseInMemoryDatabase("ExtratoDb"));
-
+// Repository
+builder.Services.AddScoped<IBankRecordRepository, BankRecordRepository>();
+// Services
+builder.Services.AddScoped<BankRecordService>();
+builder.Services.AddScoped<PDFService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
