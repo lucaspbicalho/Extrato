@@ -1,8 +1,9 @@
-﻿using Extrato.Api.ViewModel;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 using Extrato.Services.Services;
+using Extrato.Domain.ViewModel;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Extrato.Api.Controllers
 {
@@ -18,7 +19,7 @@ namespace Extrato.Api.Controllers
             this._pdfService = pdfService;
         }
         [HttpGet]
-        public IActionResult GetAll([BindRequired] FiltroDiasExtrato date)
+        public IActionResult Get([BindRequired] FiltroDiasExtrato date)
         {
             var bankRecords = _bankRecordService.Listar(date);
             return Ok(bankRecords);
@@ -43,11 +44,10 @@ namespace Extrato.Api.Controllers
         }
 
         [HttpGet]
-        [Route("GetPdf")]
+        [Route("getPdf")]
         public IActionResult GetPdf()
-        {         
+        {
             return File(_pdfService.BuildPdf(_bankRecordService.Listar()), "application/pdf", "Grid.pdf");
         }
-
     }
 }

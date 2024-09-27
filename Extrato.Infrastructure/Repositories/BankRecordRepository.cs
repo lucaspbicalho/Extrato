@@ -1,5 +1,4 @@
-﻿using Extrato.Api.ViewModel;
-using Extrato.Domain.Entites;
+﻿using Extrato.Domain.Entites;
 
 namespace Extrato.Infrastructure.Repositories
 {
@@ -11,12 +10,12 @@ namespace Extrato.Infrastructure.Repositories
         {
             _context = context;
         }
-        public List<BankRecord> Listar()
+        public List<BankRecord> GetAll()
         {
             DateTime dateNow = DateTime.Now;
             return _context.BankRecords.ToList();
         }
-        public List<BankRecord> Listar(FiltroDiasExtrato date)
+        public List<BankRecord> GetAll(FiltroDiasExtrato date)
         {
             DateTime dateNow = DateTime.Now;
             return _context.BankRecords
@@ -30,7 +29,7 @@ namespace Extrato.Infrastructure.Repositories
                 .Where(w => w.Id == id)
                 .FirstOrDefault();
         }
-        public void Save(BankRecordViewModel recordVM)
+        public void Save(BankRecord recordVM)
         {
             _context.BankRecords.Add(recordVM);
             _context.SaveChanges();

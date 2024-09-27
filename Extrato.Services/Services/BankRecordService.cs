@@ -1,5 +1,5 @@
-﻿using Extrato.Api.ViewModel;
-using Extrato.Domain.Entites;
+﻿using Extrato.Domain.Entites;
+using Extrato.Domain.ViewModel;
 using Extrato.Infrastructure.Repositories;
 using System.Data;
 
@@ -16,13 +16,14 @@ namespace Extrato.Services.Services
 
         public List<BankRecord> Listar()
         {
-            return _bankRecordRepository.Listar();
+            return _bankRecordRepository.GetAll();
         }
 
-        public IEnumerable<object> Listar(FiltroDiasExtrato date)
+        public List<BankRecordFormatedViewModel> Listar(FiltroDiasExtrato date)
         {
-            var bankRecords = _bankRecordRepository.Listar(date)
-                .Select(s => new { s.Id, data = s.Data.ToString("dd/MM"), s.Valor });
+            var bankRecords = _bankRecordRepository.GetAll(date)
+                .Select(s => new BankRecordFormatedViewModel { Data = s.Data.ToString("dd/MM"), Tipo = s.Tipo, Valor = s.Valor })
+                .ToList();
             return bankRecords;
         }
         public BankRecord GetById(Guid id)

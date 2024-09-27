@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Extrato.Domain.ViewModel.BankRecordFormatedViewModel>
+
+@{
+    ViewData["Title"] = "Extrato";
+}
+
+<h1>Extrato</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Adicionar</a>
+    <a asp-action="Extratos" class="btn btn-success">Refresh</a>
+    <a href="http://localhost:8080/api/extrato/getPdf" class="btn btn-warning btn-link">PDF</a>
+</p>
+
+
+<div class="col-md-4">
+    <form id="form_extratos" asp-action="Extratos">
+        <select onchange="document.getElementById('form_extratos').action = 'Extratos?date=' + this.value" class="form-control mb-2" asp-items="Html.GetEnumSelectList<FiltroDiasExtrato>()">
+        </select>
+        <input type="submit" value="Filtrar" class="btn btn-primary" />
+    </form>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Valor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tipo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Valor)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

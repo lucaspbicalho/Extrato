@@ -6,7 +6,5 @@
         public DateTime Data { get; set; }
         public TipoTransacao Tipo { get; set; }
         public decimal Valor { get; set; }
-
-
     }
 }
