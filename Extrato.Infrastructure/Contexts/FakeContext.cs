@@ -2,7 +2,7 @@
 
 namespace Extrato.Infrastructure
 {
-    public class FakeContext : IFakeContext
+    public class FakeContext 
     {
         public List<BankRecord> BankRecords;
         public FakeContext() 
