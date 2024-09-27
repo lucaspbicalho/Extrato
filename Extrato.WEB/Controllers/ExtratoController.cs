@@ -21,6 +21,8 @@ namespace Extrato.Web.Controllers
         public async Task<ActionResult> Extratos()
         {
             var queryString = Request.QueryString.Value;
+            if (queryString == "")
+                queryString = "?date=5";
             List<BankRecordFormatedViewModel> lista = await _requestsHandlerService.GetBankRecords(queryString);
             return View(lista);
         }
